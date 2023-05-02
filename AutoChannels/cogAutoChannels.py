@@ -37,7 +37,7 @@ class AutoChannels(commands.Cog):
         await eventOnVoiceStateUpdate.onVoiceStateUpdate(member, before, after)
 
 
-    groupAutoChannels = discordCommands.SlashCommandGroup("autochannels", "Manage the autochannels addon.")
+    groupAutoChannels = discordCommands.SlashCommandGroup("autochannels", "🔶 Group of commands to manage the autochannels addon.")
 
 
     # Verify if the bot has the prerequisites permissions
