@@ -13,7 +13,7 @@ import addons.AutoChannels.handlers.handlerDatabaseInit as handlerDatabaseInit
 
 
 # BOTASSISTANT IMPORTS
-from services.serviceLogger import consoleLogger as Logger
+from services.serviceLogger import Logger
 from services.serviceDiscordLogger import discordLogger as DiscordLogger
 from settings.settingBot import debug
 
@@ -90,7 +90,7 @@ class AutoChannels(commands.Cog):
 
 
 def setup(bot):
-    if debug: Logger.debug("Loading cog: " + init.cogName)
+    Logger.debug("Loading cog: " + init.cogName)
     handlerDatabaseInit.databaseInit()
     bot.add_cog(AutoChannels(bot))
     

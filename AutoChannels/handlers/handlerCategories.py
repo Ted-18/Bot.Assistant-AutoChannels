@@ -1,5 +1,5 @@
 import services.serviceDatabase as serviceDatabase      
-from services.serviceLogger import consoleLogger as Logger
+from services.serviceLogger import Logger
 
 from settings.settingBot import debug
 
@@ -12,8 +12,7 @@ def isAutoChannelCategory(channel):
     requestSettings = (channel.guild.id, channel.category.id,)
 
     try:
-        if debug == True:
-            Logger.debug("[HANDLER][AUTOCHANNELS][IS] Checking if a category is a autochannel " + str(channel.guild.id) + " " + str(channel.category.id))
+        Logger.debug("[HANDLER][AUTOCHANNELS][IS] Checking if a category is a autochannel " + str(channel.guild.id) + " " + str(channel.category.id))
             
         result = serviceDatabase.getInfoRequest(requestFormat, requestSettings)
 
@@ -36,8 +35,7 @@ def isAutoChannelVoiceChannel(channel):
     requestSettings = (channel.guild.id, channel.id,)
 
     try:
-        if debug == True:
-            Logger.debug("[HANDLER][AUTOCHANNELS][IS] Checking if a voice channel is a autochannel " + str(channel.guild.id) + " " + str(channel.id))
+        Logger.debug("[HANDLER][AUTOCHANNELS][IS] Checking if a voice channel is a autochannel " + str(channel.guild.id) + " " + str(channel.id))
             
         result = serviceDatabase.getInfoRequest(requestFormat, requestSettings)
 
@@ -60,8 +58,7 @@ def getAutoChannelName(channel):
     requestSettings = (channel.guild.id, channel.category.id,)
 
     try:
-        if debug == True:
-            Logger.debug("[HANDLER][AUTOCHANNELS][GET] Getting the autochannel name " + str(channel.guild.id) + " " + str(channel.category.id))
+        Logger.debug("[HANDLER][AUTOCHANNELS][GET] Getting the autochannel name " + str(channel.guild.id) + " " + str(channel.category.id))
             
         result = serviceDatabase.getInfoRequest(requestFormat, requestSettings)
 
@@ -84,8 +81,7 @@ def addAutoChannel(channelConnect, channelName):
     requestSettings = (channelConnect.guild.id, channelConnect.category.id, channelConnect.id, channelName,)
 
     try:
-        if debug == True:
-            Logger.debug("[HANDLER][AUTOCHANNELS][ADD] Adding a autochannel to the DB " + str(channelConnect.guild.id) + " " + str(channelConnect.category.id) + " " + str(channelConnect.id))
+        Logger.debug("[HANDLER][AUTOCHANNELS][ADD] Adding a autochannel to the DB " + str(channelConnect.guild.id) + " " + str(channelConnect.category.id) + " " + str(channelConnect.id))
             
         serviceDatabase.makeRequest(requestFormat, requestSettings)
 
@@ -102,8 +98,7 @@ def removeAutoChannel(channelConnect):
     requestSettings = (channelConnect.guild.id, channelConnect.category.id, channelConnect.id,)
 
     try:
-        if debug == True:
-            Logger.debug("[HANDLER][AUTOCHANNELS][REMOVE] Removing a autochannel from the DB " + str(channelConnect.guild.id) + " " + str(channelConnect.category.id) + " " + str(channelConnect.id))
+        Logger.debug("[HANDLER][AUTOCHANNELS][REMOVE] Removing a autochannel from the DB " + str(channelConnect.guild.id) + " " + str(channelConnect.category.id) + " " + str(channelConnect.id))
             
         serviceDatabase.makeRequest(requestFormat, requestSettings)
 
@@ -120,8 +115,7 @@ def removeAutoChannelID(channelID):
     requestSettings = (channelID,)
 
     try:
-        if debug == True:
-            Logger.debug("[HANDLER][AUTOCHANNELS][REMOVE] Removing a autochannel from the DB " + str(channelID))
+        Logger.debug("[HANDLER][AUTOCHANNELS][REMOVE] Removing a autochannel from the DB " + str(channelID))
             
         serviceDatabase.makeRequest(requestFormat, requestSettings)
 
@@ -138,8 +132,7 @@ def listAutoChannels(serverID):
     requestSettings = (serverID,)
 
     try:
-        if debug == True:
-            Logger.debug("[HANDLER][AUTOCHANNELS][LIST] Listing all autochannels from the DB " + str(serverID))
+        Logger.debug("[HANDLER][AUTOCHANNELS][LIST] Listing all autochannels from the DB " + str(serverID))
             
         result = serviceDatabase.getInfoRequest(requestFormat, requestSettings)
 
