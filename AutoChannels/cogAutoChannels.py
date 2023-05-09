@@ -37,8 +37,8 @@ class AutoChannels(commands.Cog):
         await eventOnVoiceStateUpdate.onVoiceStateUpdate(member, before, after)
 
 
-    groupAutoChannels = discordCommands.SlashCommandGroup("autochannels", "🔶 Group of commands to manage the autochannels addon.")
-
+    groupAutoChannels = discordCommands.SlashCommandGroup(init.cogName, "🔶 Group of commands to manage the autochannels addon.")
+    
 
     # Verify if the bot has the prerequisites permissions
     @groupAutoChannels.command(name="requirements", description="Check the prerequisites permissions of the addon.")
@@ -55,10 +55,12 @@ class AutoChannels(commands.Cog):
     
         # Voice channel where the autochannels will be created from the category
         channelconnect: discord.Option(discord.VoiceChannel, required=True),
-        channelname: discord.Option(str, required=True, min_length=1, max_length=100)
+        channelname: discord.Option(str, required=True, min_length=1, max_length=100),
+
+        activity: discord.Option(bool, required=False, default=False)
     ):
         await DiscordLogger.info(ctx, init.cogName, ctx.author.name + " has used the setup command.", str(ctx.command))
-        await commandSetup.setup(ctx, channelconnect, channelname)
+        await commandSetup.setup(ctx, channelconnect, channelname, activity)
 
 
     # Command to remove a autochannel category

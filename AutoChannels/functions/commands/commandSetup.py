@@ -6,7 +6,7 @@ import addons.AutoChannels.settings.settingThumbnail as settingThumbnail
 import services.serviceBot as serviceBot
 discord = serviceBot.classBot.getDiscord()
 
-async def setup(ctx, channelconnect, channelname):
+async def setup(ctx, channelconnect, channelname, activity):
 
     # PERMISSIONS CHECK
     import addons.AutoChannels.functions.services.servicePermission as servicePermission
@@ -42,7 +42,7 @@ async def setup(ctx, channelconnect, channelname):
         return
     
     # ADD THE CATEGORY TO THE DATABASE
-    handlerCategories.addAutoChannel(channelconnect, channelname)
+    handlerCategories.addAutoChannel(channelconnect, channelname, activity)
 
     embed = discord.Embed(
         title = "Auto Channels",

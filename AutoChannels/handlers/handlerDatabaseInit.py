@@ -10,7 +10,8 @@ def databaseInit():
             ["serverID", "BIGINT NOT NULL"],
             ["categoryID", "BIGINT NOT NULL"],
             ["channelID", "BIGINT NOT NULL"],
-            ["channelName", "VARCHAR(100) NOT NULL"]
+            ["channelName", "VARCHAR(100) NOT NULL"],
+            ["activity", "BOOLEAN NOT NULL"]
         ]
         serviceDatabase.databaseCreation(tableName, columns)
 
@@ -30,7 +31,8 @@ def databaseInit():
             ["serverID", "integer NOT NULL"],
             ["categoryID", "integer NOT NULL"],
             ["channelID", "integer NOT NULL"],
-            ["channelName", "text NOT NULL"]
+            ["channelName", "varchar(100) NOT NULL"],
+            ["activity", "bool NOT NULL"]
         ]
         serviceDatabase.databaseCreation(tableName, columns)
 

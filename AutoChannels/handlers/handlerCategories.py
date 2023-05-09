@@ -48,6 +48,29 @@ def isAutoChannelVoiceChannel(channel):
             
             Logger.error("[HANDLER][AUTOCHANNELS][IS] DB error isAutochannelVoiceChannel -> " + str(error))
             return False
+    
+
+def isAutoChannelActivity(channel):
+    requestFormat = """
+                    SELECT activity FROM addon_autochannels_categories
+                    WHERE serverID = %s AND categoryID = %s
+                    """
+    requestSettings = (channel.guild.id, channel.category.id,)
+
+    try:
+        Logger.debug("[HANDLER][AUTOCHANNELS][IS] Checking if a autochannel is a activity channel " + str(channel.guild.id) + " " + str(channel.category.id))
+            
+        result = serviceDatabase.getInfoRequest(requestFormat, requestSettings)
+
+        if result != []:
+            return result[0][0]
+        else:
+            return False
+        
+    except Exception as error:
+            
+            Logger.error("[HANDLER][AUTOCHANNELS][IS] DB error isAutochannelActivity -> " + str(error))
+            return False
 
 
 def getAutoChannelName(channel):
@@ -72,13 +95,13 @@ def getAutoChannelName(channel):
             Logger.error("[HANDLER][AUTOCHANNELS][GET] DB error getAutoChannelName -> " + str(error))
             return False
         
-def addAutoChannel(channelConnect, channelName):
+def addAutoChannel(channelConnect, channelName, activity):
     requestFormat = """
                     INSERT INTO addon_autochannels_categories
-                    (serverID, categoryID, channelID, channelName)
-                    VALUES (%s, %s, %s, %s)
+                    (serverID, categoryID, channelID, channelName, activity)
+                    VALUES (%s, %s, %s, %s, %s)
                     """
-    requestSettings = (channelConnect.guild.id, channelConnect.category.id, channelConnect.id, channelName,)
+    requestSettings = (channelConnect.guild.id, channelConnect.category.id, channelConnect.id, channelName, activity,)
 
     try:
         Logger.debug("[HANDLER][AUTOCHANNELS][ADD] Adding a autochannel to the DB " + str(channelConnect.guild.id) + " " + str(channelConnect.category.id) + " " + str(channelConnect.id))

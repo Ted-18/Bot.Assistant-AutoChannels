@@ -48,9 +48,20 @@ async def channelAfter(member, after):
         if not handlerCategories.isAutoChannelVoiceChannel(after.channel):
             return
         
-
         # Get the name of the channel from the database
-        channelName = handlerCategories.getAutoChannelName(after.channel)
+        if handlerCategories.isAutoChannelActivity(after.channel):
+            if member.activity is not None:
+                
+                for activity in member.activities:
+                    if activity.type == discord.ActivityType.playing:
+                        channelName = activity.name
+                        break
+
+            else:   
+                channelName = handlerCategories.getAutoChannelName(after.channel)
+
+        else:
+            channelName = handlerCategories.getAutoChannelName(after.channel)
 
         # Create the channel in the category with permissions of after.channel
         channel = await after.channel.category.create_voice_channel(channelName, overwrites=after.channel.overwrites)
