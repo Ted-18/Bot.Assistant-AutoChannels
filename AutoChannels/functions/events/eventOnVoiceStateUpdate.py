@@ -13,6 +13,10 @@ async def channelBefore(member, before):
     # Verify if the member has left a channel
     if before.channel != None:
 
+        # Verify if the left channel is in a category
+        if before.channel.category == None:
+            return
+
         # Verify if the channel is afk channel
         if before.channel == member.guild.afk_channel:
             return
@@ -49,8 +53,11 @@ async def channelAfter(member, after):
             return
         
         # Get the name of the channel from the database
+        channelName = handlerCategories.getAutoChannelName(after.channel)
+
         if handlerCategories.isAutoChannelActivity(after.channel):
-            if member.activity is not None:
+
+            if len(member.activities) > 0:
                 
                 for activity in member.activities:
                     if activity.type == discord.ActivityType.playing:
@@ -59,9 +66,7 @@ async def channelAfter(member, after):
 
             else:   
                 channelName = handlerCategories.getAutoChannelName(after.channel)
-
-        else:
-            channelName = handlerCategories.getAutoChannelName(after.channel)
+            
 
         # Create the channel in the category with permissions of after.channel
         channel = await after.channel.category.create_voice_channel(channelName, overwrites=after.channel.overwrites)
